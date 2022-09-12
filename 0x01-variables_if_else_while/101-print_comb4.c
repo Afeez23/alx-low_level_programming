@@ -18,8 +18,8 @@ int main(void)
 	if (i == j  j == k  i == k)
 	{
 	continue;
-	}
-	putchar(i);
+        }
+        putchar(i);
 	putchar(j);
 	putchar(k);
 
