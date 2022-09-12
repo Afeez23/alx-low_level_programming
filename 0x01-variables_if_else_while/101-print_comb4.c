@@ -14,38 +14,34 @@ int main(void)
 	for (j = i; j < 58; j++)
 	{
 	for (k = j; k < 58; k++)
-	{
+		{
 
 	if (i == j  j == k  i == k)
 	
-	{
+		{
 
-	continue;
+		continue;
 	
-	}
+		}
 
-	putchar(i);
-	
-	putchar(j);
+		putchar(i);
+		putchar(j);
+		putchar(k);
 
-	putchar(k);
+		if (i == 55 && j == 56 && k == 57)
+	
+		{	
+	
+		break;
 
+		}
 	
-	if (i == 55 && j == 56 && k == 57)
+		else
 	
-	{
+		{
 	
-	break;
-
-	}
-	
-	else
-	
-	{
-	
-	putchar(',');
-	
-	putchar(' ');
+		putchar(',');
+		putchar(' ');
 	
 	}
 
