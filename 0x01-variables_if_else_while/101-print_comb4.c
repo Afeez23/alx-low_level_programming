@@ -1,41 +1,68 @@
 #include <stdio.h>
 
 /**
-* main - prints out all possible combos of 3 digits
+*
+* main - Entry point
+*
+* Description: This porgram prints all possible combinations
+*
+* of a 3 digit number without repition
+*
 * Return: 0
+*
 */
+
 int main(void)
+
 {
 
-	int i, j, k;
+	int a, b, c;
 
-	for (i = 48; i < 58; i++)
-	{
-	for (j = i; j < 58; j++)
-	{
-	for (k = j; k < 58; k++)
-	{
-	if (i == j  j == k  i == k)
-	{
-	continue;
-        }
-        putchar(i);
-	putchar(j);
-	putchar(k);
 
-	if (i == 55 && j == 56 && k == 57)
-	{
-	break;
-	}
-	else
-	{
-	putchar(',');
-	putchar(' ');
-	}
 
-	}
-	}
-	}
-	putchar('\n');
-	return (0);
+	for (a = 0; a <= 9; a++)
+
+	{
+
+	for (b = 0; b <= 9; b++)
+
+	{
+
+	for  (c = 0; c <= 9; c++)
+
+	{
+
+																								if (a < b && b < c)
+
+																								{
+
+																									putchar(a + '0');
+
+																									putchar(b + '0');
+
+																									putchar(c + '0');
+
+
+
+																																																	if (a != 7)
+
+																																																	{
+
+																																																	putchar(',');
+
+																																																	putchar(' ');
+
+	
+																																																		}
+		 																																																}
+		   																								}
+	
+		}
+	
+		}
+
+		putchar('\n');
+
+		return (0);
+
 }
