@@ -1,33 +1,25 @@
 #include "main.h"
-#include <stdio.h>
-
 /**
- * rot13 - ...
- * @s: ...
- *
- * Return: ...
+ *rot13 - encodes a string using rot13
+ *@c: string to convert
+ *Return: encoded string
  */
-char *rot13(char *s)
+char *rot13(char *c)
 {
-	int a = 0;
+	int i, j;
+	char a[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char r[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	while (s[a])
+	for (i = 0; c[i] != '\0'; i++)
 	{
-	while ((s[a] >= 'a' && s[a] <= 'z') || (s[a] >= 'A' && s[a] <= 'Z'))
+	for (j = 0; j < 52; j++)
 	{
-	if ((s[a] > 'm' && s[a] <= 'z') || (s[a] > 'M' && s[a] <= 'Z'))
+	if (c[i] == a[j])
 	{
-	s[a] -= 13;
-	break;
-
-	}
-
-	s[a] += 13;
+	c[i] = r[j];
 	break;
 	}
-	`
-	a++;
 	}
-
-	return (s);
+	}
+	return (c);
 }
