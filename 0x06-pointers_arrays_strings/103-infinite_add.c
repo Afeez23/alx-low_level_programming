@@ -1,54 +1,50 @@
 #include "main.h"
 #include <stdio.h>
+
 /**
- * infinite_add - adds two numbers
- * @n1: number one.
- * @n2: number two.
- * @r: buffer that the function will use to store the result.
- * @size_r: buffer size:
- * Return: the pointer to dest.
+ * print_buffer - prints buffer
+ * @b: buffer
+ * @size: size
+ * Return: void
  */
 
-char *infinite_add(char *n1, char *n2, char *r, int size_r)
+void print_buffer(char *b, int size)
 {
-	int c1 = 0, c2 = 0, op, bg, dr1, dr2, add = 0;
+	int o, j, i;
 
-	while (*(n1 + c1) != '\0')
-	c1++;
-	while (*(n2 + c2) != '\0')
-	c2++;
-	if (c1 >= c2)
-	bg = c1;
-	else
-	bg = c2;
-	if (size_r <= bg + 1)
-	return (0);
-	r[bg + 1] = '\0';
-	c1--, c2--, size_r--;
-	dr1 = *(n1 + c1) - 48, dr2 = *(n2 + c2) - 48;
-	while (bg >= 0)
+	o = 0;
+
+	if (size <= 0)
 	{
-	op = dr1 + dr2 + add;
-	if (op >= 10)
-	add = op / 10;
-	else
-	add = 0;
-	if (op > 0)
-	*(r + bg) = (op % 10) + 48;
-	else
-	*(r + bg) = '0';
-	if (c1 > 0)
-	c1--, dr1 = *(n1 + c1) - 48;
-	else
-	dr1 = 0;
-	if (c2 > 0)
-	c2--, dr2 = *(n2 + c2) - 48;
-	else
-	dr2 = 0;
-	bg--, size_r--;
+	printf("\n");
+	return;
 	}
-	if (*(r) == '0')
-	return (r + 1);
+	while (o < size)
+	{
+	j = size - o < 10 ? size - o : 10;
+	printf("%08x: ", o);
+	for (i = 0; i < 10; i++)
+	{
+	if (i < j)
+	printf("%02x", *(b + o + i));
 	else
-	return (r);
+	printf("  ");
+	if (i % 2)
+	{
+	printf(" ");
+	}
+	}
+	for (i = 0; i < j; i++)
+	{
+	int c = *(b + o + i);
+
+	if (c < 32 || c > 132)
+	{
+	c = '.';
+	}
+	printf("%c", c);
+	}
+	printf("\n");
+	o += 10;
+	}
 }
