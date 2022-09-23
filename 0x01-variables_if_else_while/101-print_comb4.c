@@ -1,56 +1,34 @@
 #include <stdio.h>
-
 /**
-*
-* main - Entry point
-*
-* Description: This porgram prints all possible combinations
-*
-* of a 3 digit number without repition
-*
-* Return: 0
-*
-*/
-
+ * main - Entry point
+ *
+ * Return: Always 0 (Success/correct)
+ */
 int main(void)
 
 {
+	int left;
+	int right;
+	int center;
 
-	int a, b, c;
-
-
-
-	for (a = 0; a <= 9; a++)
+	for (left = 48; left <= 57; left++)
+	{
+	for (center = left + 1; center <= 57; center++)
+	{
+	for (right = center + 1 ; right <= 57; right++)
 
 	{
-
-		for (b = 0; b <= 9; b++)
-		{
-		for  (c = 0; c <= 9; c++)
-		{
-
-			if (a < b && b < c)
-
-																											{
-																												putchar(a + '0');
-																												putchar(b + '0');
-																												putchar(c + '0');
-
-																																																				if (a != 7)
-																																																				{
-
-																																																				putchar(',');
-				    putchar(' ');
-
-																																																				}
-
-																											}
-
-																										}
-
-
-		}
-
+	putchar(left);
+	putchar (center);
+	putchar (right);
+	if  ((left == 55) && (center == left + 1) && (right == center + 1))
+	{
+	break;
+	}
+	putchar(',');
+	putchar (' ');
+	}
+	}
 	}
 	putchar('\n');
 	return (0);
