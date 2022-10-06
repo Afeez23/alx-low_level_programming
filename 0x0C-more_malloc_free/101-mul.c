@@ -1,153 +1,85 @@
-#include <stdlib.h>
-#include <stdio.h>
 #include "main.h"
 
 /**
- * count_words - function that count words in a string
- * separated by a blank space
- * Return: number of words in the string
- * @str: pointer to the string
+ * _puts - prints a string, followed by a new line,
+ * @str: pointer to the string to print
+ * Return: void
  */
 
-int count_words(char *str)
+void _puts(char *str)
 {
-	int words = 0;
-	int flagbs = 0;
 	int i = 0;
 
-	while (*(str + i))
+	while (str[i])
 	{
-	if ((*(str + i) == ' ' || *(str + i + 1) == 0) && flagbs)
-	{
-	flagbs = 0;
-	words++;
-	}
-	if (*(str + i) != ' ')
-	flagbs = 1;
-	i++;
-	}
-	if (*(str + i - 1) != ' ' && *(str + i - 2) == ' ')
-	words++;
-	if (i == 1 && *str != ' ')
-	words++;
-	return (words);
-}
-
-/**
- * look_pos - function that stores the begining and the end position of a word
- * in a string
- * @str: pointer to the string
- * @pos: pointer ti the array used to store the positions
- */
-
-void look_pos(char *str, int *pos)
-{
-	int flagw = 1;
-	int k = 0;
-	int i = 0;
-
-	while (*(str + i))
-	{
-	if (*(str + i) != ' '  && *(str + i + 1) == 0 && flagw)
-	{
-	*(pos + k) = i;
-	*(pos + k + 1) = i;
-	}
-	if (*(str + i) != ' ' && *(str + i) != 0 && flagw)
-	{
-	flagw = 0;
-	*(pos + k) = i;
-	k++;
-	}
-	if (*(str + i + 1) == 0 && (flagw == 0))
-	*(pos + k) = i;
-	if (*(str + i + 1) == ' ' && *(str + i) != ' ')
-	{
-	*(pos + k) = i;
-	k++;
-	}
-	if (*(str + i) == ' ')
-	flagw = 1;
-	i++;
-	}
-}
-/**
- * look_pos - function that stores the begining and the end position of a word
- * in a string
- * @str: pointer to the string
- * @pos: pointer ti the array used to store the positions
- */
-
-void look_pos(char *str, int *pos)
-{
-	int flagw = 1;
-	int k = 0;
-	int i = 0;
-
-	while (*(str + i))
-	{
-	if (*(str + i) != ' '  && *(str + i + 1) == 0 && flagw)
-	{
-	*(pos + k) = i;
-	*(pos + k + 1) = i;
-	}
-	if (*(str + i) != ' ' && *(str + i) != 0 && flagw)
-	{
-	flagw = 0;
-	*(pos + k) = i;
-	k++;
-	}
-	if (*(str + i + 1) == 0 && (flagw == 0))
-	*(pos + k) = i;
-	if (*(str + i + 1) == ' ' && *(str + i) != ' ')
-	{
-	*(pos + k) = i;
-	k++;
-	}
-	if (*(str + i) == ' ')
-	flagw = 1;
+	_putchar(str[i]);
 	i++;
 	}
 }
 
 /**
- * strtow - function that returns a pointer to an array of strings (words)
- * Return: pointer to the array
- * @str: pointer to the array
+ * _atoi - convert a string to an integer.
+ * @s: char type string
+ * Return: integer converted
  */
 
-char **strtow(char *str)
+int _atoi(const char *s)
 {
-	int words;
-	char **m = NULL;
-	int *pos = NULL;
+	int sign = 1;
+	unsigned long int resp = 0, firstNum, i;
 
-	if (str == NULL || *str == 0)
-	return (NULL);
-	words = count_words(str);
-	if (words == 0)
+	for (firstNum = 0; !(s[firstNum] >= 48 && s[firstNum] <= 57); firstNum++)
 	{
-	return (NULL);
-	}
-	m = (char **) malloc((sizeof(char *)));
-	if (m == NULL)
+
+	if (s[firstNum] == '-')
 	{
-	for (words = words - 1; words >= 0; words--)
-	free(*(m + words));
-	free(m);
-	return (NULL);
+	sign *= -1;
 	}
-	pos = (int *)malloc(sizeof(int) * words * 2);
-	if (pos == NULL)
+	}
+	for (i = firstNum; s[i] >= 48 && s[i] <= 57; i++)
 	{
-	free(m);
-	free(pos);
-	return (NULL);
+	resp *= 10;
+	resp += (s[i] - 48);
 	}
-	look_pos(str, pos);
-	if (print_words(pos, m, str, words))
+	return (sign * resp);
+}
+
+/**
+ * print_int - prints an integer.
+ * @n: int
+ * Return: 0
+ */
+
+void print_int(unsigned long int n)
+{
+
+	unsigned  long int divisor = 1, i, resp;
+
+	for (i = 0; n / divisor > 9; i++, divisor *= 10)
+	;
+	for (; divisor >= 1; n %= divisor, divisor /= 10)
 	{
-	return (NULL);
+	resp = n / divisor;
+	_putchar('0' + resp);
 	}
-	return (m);
+}
+
+/**
+ * main - print the result of the multiplication, followed by a new line
+ * @argc: int
+ * @argv: list
+ * Return: 0
+ */
+
+int main(int argc, char const *argv[])
+{
+	(void)argc;
+	if (argc != 3)
+	{
+	_puts("Error ");
+	exit(98);
+	}
+	print_int(_atoi(argv[1]) * _atoi(argv[2]));
+	_putchar('\n');
+	return (0);
 }
